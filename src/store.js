@@ -1,10 +1,9 @@
 import { createStore, combineReducers, compose } from 'redux';
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
-import firebase from 'firebase/app';
-//'firebase/app'?
+import firebase from 'firebase';
 import 'firebase/firestore';
-import { reduxFirestore, firestoreReducer } from 'redux-firestore;';
-import API_KEY from './apiKey';
+import { reduxFirestore, firestoreReducer } from 'redux-firestore';
+import { API_KEY } from './apiKey';
 
 // Customer reducers
 // @todo
@@ -17,3 +16,41 @@ const firebaseConfig = {
   storageBucket: 'repayment-calculator.appspot.com',
   messagingSenderId: '1013311495506'
 };
+
+// react-redux-config
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+};
+
+// Initialize firebase app
+firebase.initializeApp(firebaseConfig);
+
+// Initialize firestore
+const firestore = firebase.firestore();
+
+// Add reactReduxFirebase enhancer
+const createStoreWithFirebase = compose(
+  reactReduxFirebase(firebase, rrfConfig),
+  reduxFirestore(firebase)
+)(createStore);
+
+const rootReducer = combineReducers({
+  firebase: firebaseReducer,
+  firestore: firestoreReducer
+});
+
+// Create initial state
+const initialState = {};
+
+// Create store
+const store = createStoreWithFirebase(
+  rootReducer,
+  initialState,
+  compose(
+    reactReduxFirebase(firebase),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
+
+export default store;
