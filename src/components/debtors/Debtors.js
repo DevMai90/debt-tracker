@@ -1,40 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 class Debtors extends Component {
   render() {
-    const debtors = [
-      {
-        id: '1',
-        balance: '100',
-        collateral: 'UCC-1',
-        debtorName: 'Chase',
-        interestRate: '5%',
-        loanType: 'CRE',
-        maturityDate: '02/02/20',
-        monthlyPmt: '100'
-      },
-      {
-        id: '2',
-        balance: '100',
-        collateral: 'UCC-1',
-        debtorName: 'Chase',
-        interestRate: '5%',
-        loanType: 'CRE',
-        maturityDate: '02/02/20',
-        monthlyPmt: '100'
-      },
-      {
-        id: '3',
-        balance: '1000',
-        collateral: 'UCC-1',
-        debtorName: 'Chase',
-        interestRate: '5%',
-        loanType: 'CRE',
-        maturityDate: '02/02/20',
-        monthlyPmt: '100'
-      }
-    ];
+    const { debtors } = this.props;
 
     if (debtors) {
       return (
@@ -88,4 +61,16 @@ class Debtors extends Component {
   }
 }
 
-export default Debtors;
+Debtors.propTypes = {
+  firestore: PropTypes.object.isRequired,
+  debtors: PropTypes.object.isRequired
+};
+
+export default compose(
+  // Pass in the collection that we want to access from firestore.
+  firestoreConnect([{ collection: 'debtors' }]), // Gets 'debtors' from firestore.
+  // Our state has firestore => ordered => debts which is what we're trying to access. All this will be put into a property called debtors. Will be accessible through this.props.debtors.
+  connect((state, props) => ({
+    debtors: state.firestore.ordered.debtors
+  }))
+)(Debtors);
