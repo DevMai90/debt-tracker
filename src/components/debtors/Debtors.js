@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Spinner } from '../layout/Spinner';
 
 class Debtors extends Component {
   render() {
@@ -57,13 +58,15 @@ class Debtors extends Component {
           </table>
         </div>
       );
+    } else {
+      return <Spinner />;
     }
   }
 }
 
 Debtors.propTypes = {
   firestore: PropTypes.object.isRequired,
-  debtors: PropTypes.object.isRequired
+  debtors: PropTypes.array
 };
 
 export default compose(

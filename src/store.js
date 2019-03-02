@@ -1,11 +1,11 @@
 import { createStore, combineReducers, compose } from 'redux';
-import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
 import { reduxFirestore, firestoreReducer } from 'redux-firestore';
 import { API_KEY } from './apiKey';
 
-// Customer reducers
+// Custom reducers
 // @todo
 
 const firebaseConfig = {
@@ -17,7 +17,7 @@ const firebaseConfig = {
   messagingSenderId: '1013311495506'
 };
 
-// react-redux-config
+// react-redux-firebase config
 const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true
@@ -27,6 +27,7 @@ const rrfConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Initialize firestore
+// const firestore = firebase.firestore();
 const firestore = firebase.firestore();
 
 // Add reactReduxFirebase enhancer
