@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Spinner } from '../layout/Spinner';
+import { DebtDetailsInput } from './DebtDetailsInput';
 import classnames from 'classnames';
 
 class DebtDetails extends Component {
@@ -73,19 +74,12 @@ class DebtDetails extends Component {
     if (showMonthlyPmtUpdate) {
       monthlyPmtForm = (
         <form onSubmit={this.monthlyPmtSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              name="monthlyPmtUpdateAmount"
-              placeholder="New Monthly Payment"
-              onChange={this.onChange}
-              value={monthlyPmtUpdateAmount}
-            />
-            <div className="input-group-append">
-              <input type="submit" className="btn btn-outline-dark" />
-            </div>
-          </div>
+          <DebtDetailsInput
+            name="monthlyPmtUpdateAmount"
+            placeholder="New Monthly Payment"
+            onChange={this.onChange}
+            value={monthlyPmtUpdateAmount}
+          />
         </form>
       );
     } else {
@@ -98,19 +92,12 @@ class DebtDetails extends Component {
     if (showBalanceUpdate) {
       balanceForm = (
         <form onSubmit={this.balanceSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              name="balanceUpdateAmount"
-              placeholder="New Outstanding Balance"
-              onChange={this.onChange}
-              value={balanceUpdateAmount}
-            />
-            <div className="input-group-append">
-              <input type="submit" className="btn btn-outline-dark" />
-            </div>
-          </div>
+          <DebtDetailsInput
+            name="balanceUpdateAmount"
+            placeholder="New Outstanding Balance"
+            onChange={this.onChange}
+            value={balanceUpdateAmount}
+          />
         </form>
       );
     } else {
