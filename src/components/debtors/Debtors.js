@@ -7,21 +7,61 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { Spinner } from '../layout/Spinner';
 
 class Debtors extends Component {
+  state = {
+    totalOutstanding: null,
+    totalMonthly: null
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    const { debtors } = props;
+
+    // if (debtors) {
+    //   let total = debtors.reduce(
+    //     (total, debtor) => total + parseFloat(debtor.balance.toString()),
+    //     0
+    //   );
+
+    //   return { totalOutstanding: total };
+    // }
+    if (debtors) {
+      let totalBalance = debtors.reduce(
+        (totalBalance, debtor) =>
+          totalBalance + parseFloat(debtor.balance.toString()),
+        0
+      );
+
+      let totalMonthlyPmt = debtors.reduce(
+        (totalMonthlyPmt, monthly) =>
+          totalMonthlyPmt + parseFloat(monthly.monthlyPmt.toString()),
+        0
+      );
+
+      return { totalOutstanding: totalBalance, totalMonthly: totalMonthlyPmt };
+    }
+    return null;
+  }
+
   render() {
     const { debtors } = this.props;
+    const { totalOutstanding, totalMonthly } = this.state;
 
     if (debtors) {
       return (
         <div>
-          <div className="row mt-2">
+          <div className="row mb-1">
             <div className="col-md-6">
               <h2>
                 <i className="fas fa-university" /> Debtors
               </h2>
             </div>
 
-            <div className="col-md-">
-              <h2>Subtotal Placeholder</h2>
+            <div className="col-md-6">
+              <h5 className="text-right text-secondary">
+                Total Outstanding: ${parseFloat(totalOutstanding).toFixed(2)}
+              </h5>
+              <h5 className="text-right text-secondary">
+                Monthly Payments: ${parseFloat(totalMonthly).toFixed(2)}
+              </h5>
             </div>
           </div>
 
@@ -54,6 +94,19 @@ class Debtors extends Component {
                   </tr>
                 );
               })}
+              <tr>
+                <td />
+                <td>
+                  <strong>Totals:</strong>
+                </td>
+                <td>
+                  <strong>${parseFloat(totalMonthly).toFixed(2)}</strong>
+                </td>
+                <td>
+                  <strong>${parseFloat(totalOutstanding).toFixed(2)}</strong>
+                </td>
+                <td />
+              </tr>
             </tbody>
           </table>
         </div>
