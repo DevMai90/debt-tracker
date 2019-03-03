@@ -6,6 +6,8 @@ import store from './store';
 
 import AppNavbar from './components/layout/AppNavbar';
 import Dashboard from './components/layout/Dashboard';
+import AddDebtor from './components/debtors/AddDebtor';
+
 import './App.css';
 
 class App extends Component {
@@ -18,6 +20,7 @@ class App extends Component {
             <div className="container">
               <Switch>
                 <Route exact path="/" component={Dashboard} />
+                <Route exact path="/debtor/add" component={AddDebtor} />
               </Switch>
             </div>
           </div>

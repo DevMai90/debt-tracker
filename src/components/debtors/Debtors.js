@@ -15,14 +15,6 @@ class Debtors extends Component {
   static getDerivedStateFromProps(props, state) {
     const { debtors } = props;
 
-    // if (debtors) {
-    //   let total = debtors.reduce(
-    //     (total, debtor) => total + parseFloat(debtor.balance.toString()),
-    //     0
-    //   );
-
-    //   return { totalOutstanding: total };
-    // }
     if (debtors) {
       let totalBalance = debtors.reduce(
         (totalBalance, debtor) =>
@@ -50,9 +42,9 @@ class Debtors extends Component {
         <div>
           <div className="row mb-1">
             <div className="col-md-6">
-              <h2>
+              <h1>
                 <i className="fas fa-university" /> Debtors
-              </h2>
+              </h1>
             </div>
 
             <div className="col-md-6">
