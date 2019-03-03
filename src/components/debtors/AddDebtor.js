@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// import { compose } from 'redux';
+// import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 class AddDebtor extends Component {
   state = {
@@ -9,11 +13,33 @@ class AddDebtor extends Component {
     balance: '',
     collateral: '',
     maturityDate: '',
-    originalPrincipal: ''
+    originalPrincipal: '',
+    loanNumber: ''
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    // The state is what we'll be adding to firestore
+    const newDebtor = this.state;
+    // We used firestoreConnect at the bottom so now we have access to this.props.firestore which has a lot of method attached to it indcluding add. We will be doing this to add to firestore.
+    const { firestore } = this.props;
+
+    if (newDebtor.balance === '') {
+      newDebtor.balance = 0;
+    }
+
+    if (newDebtor.monthlyPmt === '') {
+      newDebtor.monthlyPmt = 0;
+    }
+
+    // First paramenter is the collection that we want to add to. Second parament is the actual data that we want to add. In this case is the state.
+    // Returns a promise
+    firestore
+      .add({ collection: 'debtors' }, newDebtor)
+      .then(() => this.props.history.push('/'));
   };
 
   render() {
@@ -32,7 +58,7 @@ class AddDebtor extends Component {
             Add New Debt Information
           </div>
           <div className="card-body">
-            <div className="form">
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="debtorName">
                   Debtor Name<span className="text-danger">*</span>
@@ -117,16 +143,26 @@ class AddDebtor extends Component {
                   type="text"
                   className="form-control"
                   name="originalPrincipal"
-                  required
                   onChange={this.onChange}
                   value={this.state.originalPrincipal}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="loanNumber">Loan Number</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="loanNumber"
+                  onChange={this.onChange}
+                  value={this.state.loanNumber}
                 />
               </div>
               <small>
                 <span className="text-danger">*</span> indicates required fields
               </small>
               <input type="submit" className="btn btn-secondary btn-block" />
-            </div>
+            </form>
           </div>
         </div>
       </React.Fragment>
@@ -134,4 +170,8 @@ class AddDebtor extends Component {
   }
 }
 
-export default AddDebtor;
+AddDebtor.propTypes = {
+  firestore: PropTypes.object.isRequired
+};
+
+export default firestoreConnect()(AddDebtor);
