@@ -55,7 +55,7 @@ class AddDebtor extends Component {
 
         <div className="card mb-5">
           <div className="card-header bg-secondary text-white">
-            Add New Debt Information
+            <h4>Add New Debt Information</h4>
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>

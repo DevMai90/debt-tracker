@@ -49,10 +49,16 @@ class Debtors extends Component {
 
             <div className="col-md-6">
               <h5 className="text-right text-secondary">
-                Total Outstanding: ${parseFloat(totalOutstanding).toFixed(2)}
+                Monthly Payments:{' '}
+                <span className="text-danger">
+                  ${parseFloat(totalMonthly).toFixed(2)}
+                </span>
               </h5>
               <h5 className="text-right text-secondary">
-                Monthly Payments: ${parseFloat(totalMonthly).toFixed(2)}
+                Total Outstanding:{' '}
+                <span className="text-danger">
+                  ${parseFloat(totalOutstanding).toFixed(2)}
+                </span>
               </h5>
             </div>
           </div>
