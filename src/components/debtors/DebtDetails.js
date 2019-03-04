@@ -38,13 +38,18 @@ class DebtDetails extends Component {
 
     // Create object with info to be updated
     const updatedBalance = {
-      balance: balanceUpdateAmount
+      balance: balanceUpdateAmount === '' ? debtor.balance : balanceUpdateAmount
     };
 
     // firestore has .update() because of firestoreConnect()
     // 1st arg -> collection and document that we're working with. (object)
     // 2nd arg -> what we're updating
     firestore.update({ collection: 'debtors', doc: debtor.id }, updatedBalance);
+
+    this.setState({
+      showBalanceUpdate: !this.state.showBalanceUpdate,
+      balanceUpdateAmount: ''
+    });
   };
 
   monthlyPmtSubmit = e => {
@@ -54,13 +59,21 @@ class DebtDetails extends Component {
     const { monthlyPmtUpdateAmount } = this.state;
 
     const updatedPmtAmount = {
-      monthlyPmt: monthlyPmtUpdateAmount
+      monthlyPmt:
+        monthlyPmtUpdateAmount === ''
+          ? debtor.monthlyPmt
+          : monthlyPmtUpdateAmount
     };
 
     firestore.update(
       { collection: 'debtors', doc: debtor.id },
       updatedPmtAmount
     );
+
+    this.setState({
+      showMonthlyPmtUpdate: !this.state.showMonthlyPmtUpdate,
+      monthlyPmtUpdateAmount: ''
+    });
   };
 
   render() {
@@ -219,10 +232,14 @@ class DebtDetails extends Component {
                   Loan Type: {debtor.loanType}
                 </li>
                 <li className="list-group-item">
-                  Monthly Payment: ${this.numberWithCommas(debtor.monthlyPmt)}
+                  Monthly Payment: $
+                  {this.numberWithCommas(
+                    parseFloat(debtor.monthlyPmt).toFixed(2)
+                  )}
                 </li>
                 <li className="list-group-item">
-                  Outstanding Balance: ${this.numberWithCommas(debtor.balance)}
+                  Outstanding Balance: $
+                  {this.numberWithCommas(parseFloat(debtor.balance).toFixed(2))}
                 </li>
                 <li className="list-group-item">
                   Collateral: {debtor.collateral}
@@ -232,7 +249,9 @@ class DebtDetails extends Component {
                 </li>
                 <li className="list-group-item">
                   Original Loan Amount: $
-                  {this.numberWithCommas(debtor.originalPrincipal)}
+                  {this.numberWithCommas(
+                    parseFloat(debtor.originalPrincipal).toFixed(2)
+                  )}
                 </li>
                 <li className="list-group-item">
                   Loan Number: {debtor.loanNumber}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DebtorInputGroup } from './DebtorInputGroup';
+import { AddDebtorInput } from './AddDebtorInput';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -66,7 +66,7 @@ class AddDebtor extends Component {
                 <label htmlFor="debtorName">
                   Debtor Name<span className="text-danger">*</span>
                 </label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="debtorName"
                   minLength="2"
                   required
@@ -77,7 +77,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="loanType">Loan Type</label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="loanType"
                   onChange={this.onChange}
                   value={this.state.loanType}
@@ -88,7 +88,7 @@ class AddDebtor extends Component {
                 <label htmlFor="monthlyPmt">
                   Monthly Payment<span className="text-danger">*</span>
                 </label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="monthlyPmt"
                   required
                   onChange={this.onChange}
@@ -100,7 +100,7 @@ class AddDebtor extends Component {
                 <label htmlFor="balance">
                   Current Balance<span className="text-danger">*</span>
                 </label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="balance"
                   required
                   onChange={this.onChange}
@@ -110,7 +110,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="collateral">Collateral</label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="collateral"
                   onChange={this.onChange}
                   value={this.state.collateral}
@@ -119,7 +119,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="maturityDate">Maturity Date</label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="maturityDate"
                   onChange={this.onChange}
                   value={this.state.maturityDate}
@@ -130,7 +130,7 @@ class AddDebtor extends Component {
                 <label htmlFor="originalPrincipal">
                   Original Principal Amount
                 </label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="originalPrincipal"
                   onChange={this.onChange}
                   value={this.state.originalPrincipal}
@@ -139,7 +139,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="loanNumber">Loan Number</label>
-                <DebtorInputGroup
+                <AddDebtorInput
                   name="loanNumber"
                   onChange={this.onChange}
                   value={this.state.loanNumber}

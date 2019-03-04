@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DebtorInputGroup = props => {
+const AddDebtorInput = props => {
   return (
     <input
       type="text"
@@ -12,4 +12,4 @@ const DebtorInputGroup = props => {
   );
 };
 
-export { DebtorInputGroup };
+export { AddDebtorInput };
