@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { DebtorInputGroup } from './DebtorInputGroup';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { compose } from 'redux';
-// import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
 class AddDebtor extends Component {
@@ -67,9 +66,7 @@ class AddDebtor extends Component {
                 <label htmlFor="debtorName">
                   Debtor Name<span className="text-danger">*</span>
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="debtorName"
                   minLength="2"
                   required
@@ -80,9 +77,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="loanType">Loan Type</label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="loanType"
                   onChange={this.onChange}
                   value={this.state.loanType}
@@ -93,9 +88,7 @@ class AddDebtor extends Component {
                 <label htmlFor="monthlyPmt">
                   Monthly Payment<span className="text-danger">*</span>
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="monthlyPmt"
                   required
                   onChange={this.onChange}
@@ -107,9 +100,7 @@ class AddDebtor extends Component {
                 <label htmlFor="balance">
                   Current Balance<span className="text-danger">*</span>
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="balance"
                   required
                   onChange={this.onChange}
@@ -119,9 +110,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="collateral">Collateral</label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="collateral"
                   onChange={this.onChange}
                   value={this.state.collateral}
@@ -130,9 +119,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="maturityDate">Maturity Date</label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="maturityDate"
                   onChange={this.onChange}
                   value={this.state.maturityDate}
@@ -143,9 +130,7 @@ class AddDebtor extends Component {
                 <label htmlFor="originalPrincipal">
                   Original Principal Amount
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="originalPrincipal"
                   onChange={this.onChange}
                   value={this.state.originalPrincipal}
@@ -154,9 +139,7 @@ class AddDebtor extends Component {
 
               <div className="form-group">
                 <label htmlFor="loanNumber">Loan Number</label>
-                <input
-                  type="text"
-                  className="form-control"
+                <DebtorInputGroup
                   name="loanNumber"
                   onChange={this.onChange}
                   value={this.state.loanNumber}
