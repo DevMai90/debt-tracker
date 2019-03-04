@@ -128,7 +128,7 @@ class DebtDetails extends Component {
 
           <hr />
 
-          <div className="card">
+          <div className="card mb-5">
             <div className="card-header bg-secondary text-white">
               <h4>{debtor.debtorName}</h4>
             </div>

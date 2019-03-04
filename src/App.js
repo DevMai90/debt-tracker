@@ -8,6 +8,7 @@ import AppNavbar from './components/layout/AppNavbar';
 import Dashboard from './components/layout/Dashboard';
 import AddDebtor from './components/debtors/AddDebtor';
 import DebtDetails from './components/debtors/DebtDetails';
+import EditDebtor from './components/debtors/EditDebtor';
 
 import './App.css';
 
@@ -23,6 +24,7 @@ class App extends Component {
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/debtor/add" component={AddDebtor} />
                 <Route exact path="/debtor/:id" component={DebtDetails} />
+                <Route exact path="/debtor/edit/:id" component={EditDebtor} />
               </Switch>
             </div>
           </div>
