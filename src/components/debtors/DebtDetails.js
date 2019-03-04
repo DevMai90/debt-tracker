@@ -16,6 +16,10 @@ class DebtDetails extends Component {
     monthlyPmtUpdateAmount: ''
   };
 
+  numberWithCommas = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onDeleteClick = () => {
@@ -152,7 +156,10 @@ class DebtDetails extends Component {
                         'text-success': debtor.monthlyPmt == 0
                       })}
                     >
-                      ${parseFloat(debtor.monthlyPmt).toFixed(2)}
+                      $
+                      {this.numberWithCommas(
+                        parseFloat(debtor.monthlyPmt).toFixed(2)
+                      )}
                     </span>{' '}
                     <small>
                       <a
@@ -180,7 +187,10 @@ class DebtDetails extends Component {
                         'text-success': debtor.balance == 0
                       })}
                     >
-                      ${parseFloat(debtor.balance).toFixed(2)}
+                      $
+                      {this.numberWithCommas(
+                        parseFloat(debtor.balance).toFixed(2)
+                      )}
                     </span>{' '}
                     <small>
                       <a
@@ -209,10 +219,10 @@ class DebtDetails extends Component {
                   Loan Type: {debtor.loanType}
                 </li>
                 <li className="list-group-item">
-                  Monthly Payment: {debtor.monthlyPmt}
+                  Monthly Payment: ${this.numberWithCommas(debtor.monthlyPmt)}
                 </li>
                 <li className="list-group-item">
-                  Outstanding Balance: {debtor.balance}
+                  Outstanding Balance: ${this.numberWithCommas(debtor.balance)}
                 </li>
                 <li className="list-group-item">
                   Collateral: {debtor.collateral}
@@ -221,7 +231,8 @@ class DebtDetails extends Component {
                   Maturity Date: {debtor.maturityDate}
                 </li>
                 <li className="list-group-item">
-                  Original Loan Amount: {debtor.originalPrincipal}
+                  Original Loan Amount: $
+                  {this.numberWithCommas(debtor.originalPrincipal)}
                 </li>
                 <li className="list-group-item">
                   Loan Number: {debtor.loanNumber}

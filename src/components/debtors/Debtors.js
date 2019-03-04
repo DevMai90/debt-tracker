@@ -12,6 +12,10 @@ class Debtors extends Component {
     totalMonthly: null
   };
 
+  numberWithCommas = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   static getDerivedStateFromProps(props, state) {
     const { debtors } = props;
 
@@ -51,13 +55,16 @@ class Debtors extends Component {
               <h5 className="text-right text-secondary">
                 Monthly Payments:{' '}
                 <span className="text-danger">
-                  ${parseFloat(totalMonthly).toFixed(2)}
+                  ${this.numberWithCommas(parseFloat(totalMonthly).toFixed(2))}
                 </span>
               </h5>
               <h5 className="text-right text-secondary">
                 Total Outstanding:{' '}
                 <span className="text-danger">
-                  ${parseFloat(totalOutstanding).toFixed(2)}
+                  $
+                  {this.numberWithCommas(
+                    parseFloat(totalOutstanding).toFixed(2)
+                  )}
                 </span>
               </h5>
             </div>
@@ -79,8 +86,18 @@ class Debtors extends Component {
                   <tr key={debtor.id}>
                     <td>{debtor.debtorName}</td>
                     <td>{debtor.loanType}</td>
-                    <td>${parseFloat(debtor.monthlyPmt).toFixed(2)}</td>
-                    <td>${parseFloat(debtor.balance).toFixed(2)}</td>
+                    <td>
+                      $
+                      {this.numberWithCommas(
+                        parseFloat(debtor.monthlyPmt).toFixed(2)
+                      )}
+                    </td>
+                    <td>
+                      $
+                      {this.numberWithCommas(
+                        parseFloat(debtor.balance).toFixed(2)
+                      )}
+                    </td>
                     <td>
                       <Link
                         to={`/debtor/${debtor.id}`}
@@ -98,10 +115,14 @@ class Debtors extends Component {
                   <strong>Totals:</strong>
                 </td>
                 <td>
-                  <strong>${parseFloat(totalMonthly).toFixed(2)}</strong>
+                  <strong>
+                    ${this.numberWithCommas(totalMonthly.toFixed(2))}
+                  </strong>
                 </td>
                 <td>
-                  <strong>${parseFloat(totalOutstanding).toFixed(2)}</strong>
+                  <strong>
+                    ${this.numberWithCommas(totalOutstanding.toFixed(2))}
+                  </strong>
                 </td>
                 <td />
               </tr>

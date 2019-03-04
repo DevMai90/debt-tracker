@@ -35,6 +35,10 @@ class AddDebtor extends Component {
       newDebtor.monthlyPmt = 0;
     }
 
+    if (newDebtor.originalPrincipal === '') {
+      newDebtor.originalPrincipal = 0;
+    }
+
     // First paramenter is the collection that we want to add to. Second parament is the actual data that we want to add. In this case is the state.
     // Returns a promise
     firestore
