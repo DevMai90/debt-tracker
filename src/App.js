@@ -12,6 +12,7 @@ import AddDebtor from './components/debtors/AddDebtor';
 import DebtDetails from './components/debtors/DebtDetails';
 import EditDebtor from './components/debtors/EditDebtor';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 import './App.css';
 
@@ -48,6 +49,11 @@ class App extends Component {
                   exact
                   path="/login"
                   component={UserIsNotAuthenticated(Login)}
+                />
+                <Route
+                  exact
+                  path="/register"
+                  component={UserIsNotAuthenticated(Register)}
                 />
               </Switch>
             </div>
