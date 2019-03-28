@@ -37,7 +37,7 @@ class AppNavbar extends Component {
       <nav className="navbar navbar-expand-md bg-secondary navbar-dark mb-4 py-3">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            Repayment Calculator
+            Debt Tracker
           </Link>
           <button
             className="navbar-toggler"
