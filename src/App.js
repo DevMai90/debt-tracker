@@ -13,6 +13,7 @@ import DebtDetails from './components/debtors/DebtDetails';
 import EditDebtor from './components/debtors/EditDebtor';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import LoanCalculator from './components/calculator/LoanCalculator';
 
 import './App.css';
 
@@ -55,6 +56,7 @@ class App extends Component {
                   path="/register"
                   component={UserIsNotAuthenticated(Register)}
                 />
+                <Route exact path="/calculator" component={LoanCalculator} />
               </Switch>
             </div>
           </div>

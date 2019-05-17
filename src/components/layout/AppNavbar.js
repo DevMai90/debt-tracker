@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
@@ -50,11 +50,18 @@ class AppNavbar extends Component {
           <div className="navbar-collapse collapse" id="navbarMain">
             <ul className="navbar-nav mr-auto">
               {isAuthenticated ? (
-                <li className="nav-item">
-                  <Link to="/" className="nav-link">
-                    Dashboard
-                  </Link>
-                </li>
+                <Fragment>
+                  <li className="nav-item">
+                    <Link to="/" className="nav-link">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/calculator" className="nav-link">
+                      Loan Calculator
+                    </Link>
+                  </li>
+                </Fragment>
               ) : null}
             </ul>
             {!isAuthenticated ? (
